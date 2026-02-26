@@ -1,0 +1,11 @@
+html{
+  scroll-behavior: smooth;
+}
+body {
+  background: linear-gradient(120deg, #f3cba5, #b9825f)no-repeat;
+  min-height: 100vh;
+  font-family: Sans-Serif;
+}
+hr{
+  color:white;
+}
