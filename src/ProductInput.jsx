@@ -1,7 +1,10 @@
 import { useControl } from './Context/control.jsx';
 import colors from './color.jsx';
+import Head from './Head.jsx';
+import { useNavigate } from 'react-router-dom'
 
 export default function ProductInput(){
+  const navigate = useNavigate();
   const { 
     name,
     description,
@@ -13,10 +16,21 @@ export default function ProductInput(){
     handleUpload,
     setName,
     setDescription,
+    isupdate,
   } = useControl();
 
   return(
-    <div className="p-3 grid items-center place-items-center gap-3 w-[100%]">
+    <>
+     <Head 
+     icon={<i className="fas fa-chevron-left"></i>}
+     title={isupdate ? "Update Product" : "Upload Product"}
+     handleClick={()=>{
+       navigate(-1)
+     }}
+     />
+     
+    <div className="p-3 grid items-center place-items-center gap-3 w-[100%]
+    mt-[60px]">
 
       {/* Hidden file input */}
       <input
@@ -40,10 +54,9 @@ export default function ProductInput(){
             htmlFor="file"
             className="w-full h-full flex flex-col items-center justify-center gap-2 cursor-pointer"
           >
-            <i
-              className="fa-regular fa-images text-5xl"
-              style={{ color: colors.secondaryText }}
-            ></i>
+    <i className="fa-regular fa-images text-5xl" style={{ 
+    color: colors.secondaryText
+    }}></i>
             <span
               className="text-sm font-semibold"
               style={{ color: colors.secondaryText }}
@@ -156,9 +169,15 @@ export default function ProductInput(){
           opacity: loading ? 0.6 : 1,
         }}
       >
-        {loading ? 'Uploading...' : 'Upload Product'}
+       {loading ?
+   (isupdate ? 'Updating...' : 'Uploading...') : 
+   (isupdate ? 'Update Product' : 'Upload Product')
+       }
       </button>
+      
+    
 
     </div>
+    </>
   );
 }
